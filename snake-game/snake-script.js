@@ -1,0 +1,199 @@
+// Variables from position
+let appleX = 0;
+let appleY = 0;
+
+let snakeX = 0;
+let snakeY = 0;
+
+// Variables for touch screen input
+let xDown = null;                                                        
+let yDown = null;
+
+// array to convert keyboard input to direction
+const keyArray = [];
+keyArray["w"] = "north";
+keyArray["a"] = "west";
+keyArray["s"] = "south";
+keyArray["d"] = "east";
+
+// array to store snake bodies
+let bodies = [];
+
+// variables holding HTML elements
+const APPLE = document.querySelector("#apple");
+const SNAKE_HEAD = document.querySelector("#head");
+
+// variable storing direction
+let direction = "north";
+
+// Function called on screen loaded
+function start() {
+
+    // Generate random position for apple element
+    appleX = Math.floor(Math.random() * (window.innerWidth + 1) / 25) * 25;
+    appleY = Math.floor(Math.random() * (window.innerHeight + 1) / 25) * 25;
+    
+    // Generate random position for snake head element
+    snakeX = Math.floor(Math.random() * (window.innerWidth + 1) / 25) * 25;
+    snakeY = Math.floor(Math.random() * (window.innerHeight + 1) / 25) * 25;
+ 
+    // Assign randomly generated position to apple element
+    APPLE.style.left = appleX + "px";
+    APPLE.style.top = appleY + "px";
+
+    // Assign randomly generated position to snake head element
+    SNAKE_HEAD.style.left = snakeX + "px";
+    SNAKE_HEAD.style.top = snakeY + "px";
+}
+
+// Function called every 175ms
+function update() {
+
+    // Check if snake head is colliding with the apple
+    if (appleX == snakeX && appleY == snakeY) {
+
+        // Generate new position for the apple element
+        appleX = Math.floor(Math.random() * (window.innerWidth + 1) / 25) * 25;
+        appleY = Math.floor(Math.random() * (window.innerHeight + 1) / 25) * 25;
+        
+        // Assign randomly generated position to apple element
+        APPLE.style.left = appleX + "px";
+        APPLE.style.top = appleY + "px";
+        
+        // Create adn assign the new body for the snake
+        let b = document.createElement('div');
+        b.className = "body";
+        bodies.push(b);
+        document.body.append(b);
+    }
+    
+    // Call moveSnake() to move snake
+    moveSnake();
+}
+
+// Function to move snake with respect to direction
+function moveSnake() {
+
+    // Save snake position to assign it to the body
+    let previousX = snakeX + "px";
+    let previousY = snakeY + "px";
+    
+    // Move snake with respect to the direction
+    switch (direction) {
+        case "north":
+            snakeY -= 25;
+            
+            // Check if the snake is outside the screen
+            if(snakeY < 0) {
+                snakeY = Math.floor(window.innerHeight/25) * 25;
+            } 
+
+            SNAKE_HEAD.style.top = snakeY + "px";
+            break;
+        case "south":
+            snakeY += 25;
+            
+            // Check if the snake is outside the screen
+            if(snakeY > Math.floor(window.innerHeight/25) * 25) {
+                snakeY= 0;
+            } 
+
+            SNAKE_HEAD.style.top = snakeY + "px";
+            break;
+        case "west":
+            snakeX -= 25;
+
+            // Check if the snake is outside the screen
+            if(snakeX < 0) {
+                snakeX = Math.floor(window.innerWidth/25) * 25;
+            } 
+
+            SNAKE_HEAD.style.left = snakeX + "px";
+            break;
+        case "east":
+            snakeX += 25;
+
+            // Check if the snake is outside the screen
+            if(snakeX > Math.floor(window.innerWidth/25) * 25) {
+                snakeX = 0;
+            } 
+
+            SNAKE_HEAD.style.left = snakeX + "px";
+            break;
+    }
+
+    // Move body parts of the snake
+    bodies.forEach((body, index) => {
+
+        // Save body's position
+        let x = body.style.left;
+        let y = body.style.top;
+        
+        // Assign position to the body
+        body.style.left = previousX;
+        body.style.top = previousY;
+
+        // Save position in global scope
+        previousX = x;
+        previousY = y;
+    });
+}
+
+function getTouches(evt) {
+  return evt.touches ||             // browser API
+         evt.originalEvent.touches; // jQuery
+}                                                     
+                                                                         
+function handleTouchStart(evt) {
+    const firstTouch = getTouches(evt)[0];                                      
+    xDown = firstTouch.clientX;                                      
+    yDown = firstTouch.clientY;                                      
+};                                                
+                                                                         
+function handleTouchMove(evt) {
+    if ( ! xDown || ! yDown ) {
+        return;
+    }
+
+    var xUp = evt.touches[0].clientX;                                    
+    var yUp = evt.touches[0].clientY;
+
+    var xDiff = xDown - xUp;
+    var yDiff = yDown - yUp;
+                                                                         
+    if ( Math.abs( xDiff ) > Math.abs( yDiff ) ) {/*most significant*/
+        if ( xDiff > 0 ) {
+            /* right swipe */ 
+            direction = keyArray["a"];
+        } else {
+            /* left swipe */
+            direction = keyArray["d"];
+        }                       
+    } else {
+        if ( yDiff > 0 ) {
+            /* down swipe */ 
+            direction = keyArray["w"];
+        } else { 
+            /* up swipe */
+            direction = keyArray["s"];
+        }                                                                 
+    }
+    /* reset values */
+    xDown = null;
+    yDown = null;                                             
+};
+
+// Add event listener for key input
+document.addEventListener('keydown', (e) => {
+    if (keyArray[e.key] != null) {
+        direction = keyArray[e.key];
+    }
+});
+
+// Add event listener for touch input
+document.addEventListener('touchstart', handleTouchStart, false);        
+document.addEventListener('touchmove', handleTouchMove, false);
+
+// Call necessary functions
+setInterval(update, 175);
+start();
