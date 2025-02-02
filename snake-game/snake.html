@@ -11,6 +11,37 @@
 </head>
 <body>
 
+    <audio id="lose-sound">
+        <source src="sounds/lose.mp3" type="audio/mp3" />
+    </audio>
+
+    <audio id="background-music" loop>
+        <source src="sounds/background-music.mp3" type="audio/mp3" />
+    </audio>
+
+    <audio id="eat-sound">
+        <source src="sounds/eat.mp3" type="audio/mp3" />
+    </audio>
+
+    <div class="container">
+
+        <div class="main-menu">
+            <h2 class="title">MAIN MENU</h2>
+
+            <button class="play-button" onclick="start()">Play</button>
+            <button class="credits-button">Credits</button>
+            <button class="settings-button">Settings</button>
+            <button class="exit-button">Exit</button>
+        </div>
+
+        <div class="game-over">
+            <h2 class="title">GAME OVER</h2>
+
+            <button class="play-button" onclick="start()">Play Again</button>
+            <button class="exit-button" onclick="location.reload()">Back</button>
+        </div>
+    </div>
+
     <!-- Apple div (randomly placed) -->
     <div id="apple"></div>
 
