@@ -1,5 +1,88 @@
+@import url("https://fonts.googleapis.com/css2?family=Baloo+Bhaijaan+2&family=Dosis:wght@200..800&family=Pixelify+Sans:wght@400..700&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
+
+* {
+    user-select: none;
+    -webkit-user-select: none;
+
+    margin: 0;
+    padding: 0;
+
+    font-family: "Pixelify Sans", serif;
+}
+
 body {
     overflow: hidden;
+    background-color: #333;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 100vw;
+    height: 100vh;
+}
+
+.container {
+    z-index: 2;
+}
+
+.main-menu {
+    padding: 25px;
+
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+
+    border-radius: 8px;
+
+    background-color: #bfbfbf;
+    transition: all 0.5s ease;
+}
+
+.title {
+    font-size: 10vw;
+    
+    width: 60vw;
+
+    text-align: center;
+
+    margin-bottom: 2vh;
+}
+
+button {
+    margin: 0.6rem;
+    font-size: 1.2rem;
+
+    width: 40vw;
+    height: 2.4rem;
+
+    border: none;
+    border-radius: 8px;
+
+    color: white;
+    background-color: #1e1e1e;
+
+    &:hover {
+        color: #05ff72;
+        scale: 1.05;
+    }
+}
+
+.game-over {
+    padding: 25px;
+
+    display: none;
+    align-items: center;
+    flex-direction: column;
+
+    border-radius: 8px;
+
+    background-color: #bfbfbf;
+    transition: all 0.5s ease;
+}
+
+#head, #apple {
+    display: none;
 }
 
 #head, .body, #apple {
@@ -8,8 +91,9 @@ body {
 
     position: absolute;
 
-    background-color: rgb(255, 255, 150);
+    background-color: #05ff72;
     box-shadow: 0 0 2px #000000ee;
+    outline: 0.5px solid black;
 }
 
 #apple {
@@ -17,5 +101,38 @@ body {
 }
 
 .body {
-    background-color: beige;
+    background-color: #6cd097;
+}
+
+@keyframes flash {
+    0% {
+        color: #b7b7b7;
+    }
+    10% {
+        color: #000000;
+    }
+    20% {
+        color: #b7b7b7;
+    }
+    30% {
+        color: #000000;
+    }
+    40% {
+        color: #b7b7b7;
+    }
+    50% {
+        color: #000000;
+    }
+    60% {
+        color: #b7b7b7;
+    }
+    70% {
+        color: #000000;
+    }
+    80% {
+        color: #b7b7b7;
+    }
+    90% {
+        color: #000000;
+    }
 }
