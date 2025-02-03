@@ -87,7 +87,7 @@ function update() {
             EAT_SOUND.play();
             
             let isPositionValid = false;
-            while(isPositionValid) {
+            while(!isPositionValid) {
                 
                 // Generate new position for the apple element
                 appleX = Math.floor(Math.random() * (window.innerWidth + 1) / 25) * 25;
