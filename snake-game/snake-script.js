@@ -85,10 +85,21 @@ function update() {
         if (appleX == snakeX && appleY == snakeY) {
 
             EAT_SOUND.play();
-
-            // Generate new position for the apple element
-            appleX = Math.floor(Math.random() * (window.innerWidth + 1) / 25) * 25;
-            appleY = Math.floor(Math.random() * (window.innerHeight + 1) / 25) * 25;
+            
+            let isPositionValid = false;
+            while(!isPositionValid) {
+                
+                // Generate new position for the apple element
+                appleX = Math.floor(Math.random() * (window.innerWidth + 1) / 25) * 25;
+                appleY = Math.floor(Math.random() * (window.innerHeight + 1) / 25) * 25;
+                
+                isPositionValid = true;
+                bodyPositions.forEach((position) => {
+                    if (position[0] == appleX + "px" && position[1] == appleY + "px") {
+                        isPositionValid = false;
+                    }
+                });
+            }
 
             // Assign randomly generated position to apple element
             APPLE.style.left = appleX + "px";
