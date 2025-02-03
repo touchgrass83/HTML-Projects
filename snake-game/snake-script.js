@@ -180,6 +180,8 @@ function moveSnake() {
 
     bodyPositions = [];
 
+    bodyPositions.push([snakeX, snakeY]);
+
     // Move body parts of the snake
     bodies.forEach((body) => {
 
