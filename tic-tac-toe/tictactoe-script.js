@@ -30,8 +30,10 @@ function start() {
 
     GAME_DRAW_SOUND.pause();
     GAME_WON_SOUND.pause();
+    GAME_END_SOUND.pause();
 
     GAME_DRAW_SOUND.currentTime = 0;
+    GAME_END_SOUND.currentTime = 0;
     GAME_WON_SOUND.currentTime = 0;
     
     BACKGROUND_MUSIC.currentTime = 0;
