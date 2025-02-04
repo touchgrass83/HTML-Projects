@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" href="tictactoe-style.css" />
+
+    <title>Tic Tac Toe</title>
+  </head>
+  <body>
+
+    <audio id="btn-click-sound">
+        <source src="sounds/btn-click.mp3" type="audio/mp3" />
+    </audio>
+
+    <audio id="game-end-sound" loop>
+        <source src="sounds/game-end.mp3" type="audio/mp3" />
+    </audio>
+
+    <audio id="game-won-sound">
+        <source src="sounds/game-won.mp3" type="audio/mp3" />
+    </audio>
+
+    <audio id="game-draw-sound">
+        <source src="sounds/game-draw.mp3" type="audio/mp3" />
+    </audio>
+
+    <audio id="background-music" loop>
+        <source src="sounds/background-music.mp3" type="audio/mp3" />
+    </audio>
+
+    <main>
+      <div class="game">
+        <h2 class="title">TIC TAC TOE</h2>
+
+        <div class="game-box">
+          <div class="btn" id="1"></div>
+          <div class="btn" id="2"></div>
+          <div class="btn" id="3"></div>
+          <div class="btn" id="4"></div>
+          <div class="btn" id="5"></div>
+          <div class="btn" id="6"></div>
+          <div class="btn" id="7"></div>
+          <div class="btn" id="8"></div>
+          <div class="btn" id="9"></div>
+        </div>
+      </div>
+
+      <div class="container">
+        <div class="main-menu">
+          <h2 class="title">MAIN MENU</h2>
+
+          <button class="play-button" onclick="start()">Play</button>
+          <button class="credits-button">Credits</button>
+          <button class="settings-button">Settings</button>
+          <button class="exit-button">Exit</button>
+        </div>
+
+        <div class="game-over">
+          <h2 class="title">GAME OVER</h2>
+
+          <button class="play-button" onclick="start()">Play Again</button>
+          <button class="exit-button" onclick="location.reload()">Back</button>
+        </div>
+      </div>
+    </main>
+
+    <script src="tictactoe-script.js"></script>
+  </body>
+</html>
