@@ -53,7 +53,7 @@ function handleOperation(e) {
 
     let oper = e.target;
 
-    switch(oper.id) {
+    switch (oper.id) {
         case "equal":
             eq.calculateValue();
             SCREEN.innerText = eq.getValue();
@@ -63,12 +63,12 @@ function handleOperation(e) {
             SCREEN.innerText = eq.getValue();
             break;
         default:
-            if(canOperate) {
+            if (canOperate) {
                 eq.addValue(oper.innerText);
                 SCREEN.innerText = eq.getValue();
-    
+
                 canOperate = false;
-                
+
                 scrollToEnd();
             }
             break;
